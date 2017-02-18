@@ -12,6 +12,8 @@ let fileTree = {
 let stack = ['patterns'];
 let nodeStack = [fileTree];
 
+let lessImports = [];
+
 while (stack.length > 0) {
 	let pop = stack.shift();
 	let node = nodeStack.shift();
@@ -36,6 +38,11 @@ while (stack.length > 0) {
 		};
 		pathMap[key].ext.push(match[2]);
 		delete node.children;
+
+		if(match[2] === '.less') {
+			let lessImport = `@import '../../${pop.replace(/\\/g, '/')}';`;
+			lessImports.push(lessImport);
+		}
 	}
 }
 
@@ -49,5 +56,10 @@ let asJson = JSON.stringify(patternManifest, undefined, '\t');
 fs.writeFileSync(
 	'./core/src/patterns.manifest.ts',
 	`export const patternManifest = ${asJson};`);
+
+fs.writeFileSync(
+	'./core/src/patterns.manifest.less',
+	`${lessImports.join('\n')}`
+)
 
 process.exit();

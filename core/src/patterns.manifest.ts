@@ -10,6 +10,7 @@ export const patternManifest = {
 			"name": "person-editor",
 			"ext": [
 				".html",
+				".json",
 				".less"
 			]
 		},
@@ -17,6 +18,7 @@ export const patternManifest = {
 			"name": "person-selector",
 			"ext": [
 				".html",
+				".json",
 				".less"
 			]
 		}
@@ -39,10 +41,16 @@ export const patternManifest = {
 						"name": "person-editor.html"
 					},
 					{
+						"name": "person-editor.json"
+					},
+					{
 						"name": "person-editor.less"
 					},
 					{
 						"name": "person-selector.html"
+					},
+					{
+						"name": "person-selector.json"
 					},
 					{
 						"name": "person-selector.less"

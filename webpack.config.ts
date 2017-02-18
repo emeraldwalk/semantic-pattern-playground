@@ -10,26 +10,11 @@ let config: Configuration = {
 	resolve: {
 		extensions: ['', '.ts']
 	},
-	// resolveLoader: {
-	// 	alias: {
-	// 		'template-loader': path.join(__dirname, 'webpack.templates.ts')
-	// 	}
-	// },
 	module: {
-		// preLoaders: [
-		// 	{
-		// 		test: /\.ts$/,
-		// 		loader: 'import-glob'
-		// 	}
-		// ],
 		loaders: [
-			// {
-			// 	test: /\.html$/,
-			// 	loader: 'template-loader',
-			// },
 			{
 				test: /\.ts$/,
-				loader: 'awesome-typescript-loader',
+				loader: 'awesome-typescript-loader'
 			},
 			{
 				test: /\.less$/,
