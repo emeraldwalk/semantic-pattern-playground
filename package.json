@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Playground for building ux patterns using semantic html.",
   "main": "index.js",
+  "bin": {
+    "build": "core/build_manifest.js"
+  },
   "scripts": {
     "serve": "node core/build_manifest.js && webpack-dev-server"
   },
