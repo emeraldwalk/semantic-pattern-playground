@@ -15,7 +15,7 @@ let nodeStack = [fileTree];
 let lessImports = [];
 
 while (stack.length > 0) {
-	let pop = stack.shift();
+	let pop = path.resolve(__dirname, '..', stack.shift());
 	let node = nodeStack.shift();
 
 	if (fs.statSync(pop).isDirectory()) {
@@ -31,7 +31,8 @@ while (stack.length > 0) {
 	}
 	else {
 		let match = pop.match(/([^\/\\]+)\.([^\.]+)$/);
-		let key = pop.split('.')[0].replace(/\\/g, '/');
+		let key = path.relative(process.cwd(), pop);
+		key = key.split('.')[0].replace(/\\/g, '/');
 		pathMap[key] = pathMap[key] || {
 			name: match[1]
 		};
@@ -39,7 +40,7 @@ while (stack.length > 0) {
 		delete node.children;
 
 		if(match[2] === 'less') {
-			let lessImport = `@import '../../${pop.replace(/\\/g, '/')}';`;
+			let lessImport = `@import '../../${key}.less';`;
 			lessImports.push(lessImport);
 		}
 	}
@@ -53,7 +54,7 @@ let patternManifest = {
 let asJson = JSON.stringify(patternManifest, undefined, '\t');
 
 fs.writeFileSync(
-	'./core/src/patterns.manifest.ts',
+	path.resolve(__dirname, '..', 'core/src/patterns.manifest.ts'),
 `export interface ITreeNode {
 	name: string;
 	children?: Array<ITreeNode>;
@@ -72,7 +73,7 @@ export interface IPatternManifest {
 export const patternManifest: IPatternManifest = ${asJson};`);
 
 fs.writeFileSync(
-	'./core/src/patterns.manifest.less',
+	path.resolve(__dirname, '..', 'core/src/patterns.manifest.less'),
 	`${lessImports.join('\n')}`
 )
 
