@@ -30,16 +30,15 @@ while (stack.length > 0) {
 		}
 	}
 	else {
-		let match = pop.match(/([^\/\\]+)(\.[^\.]+)$/);
-		let key = pop.split('.')[0];
+		let match = pop.match(/([^\/\\]+)\.([^\.]+)$/);
+		let key = pop.split('.')[0].replace(/\\/g, '/');
 		pathMap[key] = pathMap[key] || {
-			name: match[1],
-			ext: []
+			name: match[1]
 		};
-		pathMap[key].ext.push(match[2]);
+		pathMap[key][match[2]] = true;
 		delete node.children;
 
-		if(match[2] === '.less') {
+		if(match[2] === 'less') {
 			let lessImport = `@import '../../${pop.replace(/\\/g, '/')}';`;
 			lessImports.push(lessImport);
 		}
@@ -55,7 +54,22 @@ let asJson = JSON.stringify(patternManifest, undefined, '\t');
 
 fs.writeFileSync(
 	'./core/src/patterns.manifest.ts',
-	`export const patternManifest = ${asJson};`);
+`export interface ITreeNode {
+	name: string;
+	children?: Array<ITreeNode>;
+}
+export interface IPatternManifest {
+	map: {
+		[key: string]: {
+			name: string,
+			html?: boolean,
+			json?: boolean,
+			less?: boolean
+		}
+	},
+	tree: ITreeNode;
+}
+export const patternManifest: IPatternManifest = ${asJson};`);
 
 fs.writeFileSync(
 	'./core/src/patterns.manifest.less',

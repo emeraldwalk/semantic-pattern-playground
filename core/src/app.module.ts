@@ -1,10 +1,28 @@
 declare function require(path: string);
+require("../src/app.less");
 require("../src/patterns.manifest.less");
 
 import * as angular from 'angular';
-import { patternManifest } from '../src/patterns.manifest';
+import * as uiRouter from 'angular-ui-router';
+import { ITreeNode, patternManifest } from '../src/patterns.manifest';
+import { AppComponent } from './app.component';
+import { states } from './app.routes';
 
-export const appModule = angular.module('patternSandbox', []);
+export const appModule = angular.module('patternSandbox', ['ngSanitize', 'ui.router']);
+
+appModule.component('app', {
+	template: AppComponent.template,
+	controller: AppComponent
+});
+
+/**
+ * Routing
+ */
+appModule.config([
+	'$stateProvider',
+	($stateProvider: ng.ui.IStateProvider) => {
+		states.forEach(state => $stateProvider.state(state));
+	}]);
 
 /**
  * Convert a dashed-string to camelCase.
@@ -14,24 +32,18 @@ function dashToCamelCase(text: string) {
 }
 
 /**
- * Filter out configs by extension.
+ * Keys for any configs with .html
  */
-function getConfigs(ext: string): Array<{ name: string, url: string, hasData: boolean }> {
-	return Object
-		.keys(patternManifest.map)
-		.filter(key => patternManifest.map[key].ext.indexOf(ext) > -1)
-		.map(key => ({
-			name: patternManifest.map[key].name,
-			url: `${key}${ext}`,
-			hasData: patternManifest.map[key].ext.indexOf('.json') > -1
-		}));
-}
+let componentKeys = Object
+	.keys(patternManifest.map)
+	.filter(key => patternManifest.map[key].html);
 
-getConfigs('.html').forEach(config => {
+for (let key of componentKeys) {
+	let config = patternManifest.map[key];
 	appModule.component(dashToCamelCase(config.name), {
 		templateUrl: ($element: ng.IRootElementService) => {
 			$element.addClass(`c-${config.name}`);
-			return config.url;
+			return `${key}.html`;
 		},
 		controller: class {
 			public static $inject = ['$http', '$scope'];
@@ -41,10 +53,10 @@ getConfigs('.html').forEach(config => {
 			}
 
 			public $onInit(): void {
-				if (config.hasData) {
-					this._$http.get(config.url.replace(/\.html$/, '.json'))
+				if (config.json) {
+					this._$http.get(`${key}.json`)
 						.then(content => {
-							for(let key in content.data) {
+							for (let key in content.data) {
 								this._$scope[key] = content.data[key];
 							}
 						});
@@ -52,4 +64,4 @@ getConfigs('.html').forEach(config => {
 			}
 		}
 	});
-});
+}

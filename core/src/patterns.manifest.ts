@@ -1,26 +1,35 @@
-export const patternManifest = {
+export interface ITreeNode {
+	name: string;
+	children?: Array<ITreeNode>;
+}
+export interface IPatternManifest {
+	map: {
+		[key: string]: {
+			name: string,
+			html?: boolean,
+			json?: boolean,
+			less?: boolean
+		}
+	},
+	tree: ITreeNode;
+}
+export const patternManifest: IPatternManifest = {
 	"map": {
-		"patterns\\0_elements\\elements": {
-			"name": "elements",
-			"ext": [
-				".html"
-			]
+		"patterns/0_elements/headers": {
+			"name": "headers",
+			"html": true
 		},
-		"patterns\\1_components\\person-editor": {
+		"patterns/1_components/person-editor": {
 			"name": "person-editor",
-			"ext": [
-				".html",
-				".json",
-				".less"
-			]
+			"html": true,
+			"json": true,
+			"less": true
 		},
-		"patterns\\1_components\\person-selector": {
+		"patterns/1_components/person-selector": {
 			"name": "person-selector",
-			"ext": [
-				".html",
-				".json",
-				".less"
-			]
+			"html": true,
+			"json": true,
+			"less": true
 		}
 	},
 	"tree": {
@@ -30,7 +39,7 @@ export const patternManifest = {
 				"name": "0_elements",
 				"children": [
 					{
-						"name": "elements.html"
+						"name": "headers.html"
 					}
 				]
 			},
