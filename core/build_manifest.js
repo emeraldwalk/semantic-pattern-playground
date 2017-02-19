@@ -15,7 +15,7 @@ let nodeStack = [fileTree];
 let lessImports = [];
 
 while (stack.length > 0) {
-	let pop = path.resolve(__dirname, '..', stack.shift());
+	let pop = stack.shift();// path.resolve(__dirname, '..', stack.shift());
 	let node = nodeStack.shift();
 
 	if (fs.statSync(pop).isDirectory()) {
