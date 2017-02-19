@@ -1,8 +1,8 @@
 {
-  "name": "pattern-sandbox",
+  "name": "semantic-pattern-playground",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Playground for building ux patterns using semantic html.",
   "main": "index.js",
   "scripts": {
     "serve": "node core/build_manifest.js && webpack-dev-server"
