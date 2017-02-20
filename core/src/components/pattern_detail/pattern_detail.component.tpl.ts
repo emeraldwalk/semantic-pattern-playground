@@ -11,7 +11,8 @@ export const templateProvider = [
 	$element.addClass('sps-pattern-detail');
 
 	let patternId = patternIdToSelector($stateParams['id']);
-	return `<div ng-if="$ctrl.templateSrc" class="sps-pattern__render"><${patternId}></${patternId}></div>
+	return `<h2 ng-if="$ctrl.templateSrc" class="sps-pattern-detail__header-code">Pattern</h2>
+		<div ng-if="$ctrl.templateSrc" class="sps-pattern__render"><${patternId}></${patternId}></div>
 
 		<h2 ng-if="$ctrl.templateSrc" class="sps-pattern-detail__header-code">Source</h2>
 		<pre ng-if="$ctrl.templateSrc" class="sps-pattern__html">{{$ctrl.templateSrc}}</pre>

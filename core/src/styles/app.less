@@ -3,6 +3,7 @@
 
 html {
 	font-family: @font-family;
+	color: #333;
 	background-color: #ccc;
 }
 
@@ -12,11 +13,21 @@ ul, li {
 	list-style: none;
 }
 
+.sps-masthead {
+	font-family: @font-family;
+	padding: @padding;
+	color: #fff;
+	background-color: #333;
+	&__title {
+		font-size: 2em;
+	}
+}
+
 .sps-navbar {
 	font-family: @font-family;
 	padding: @padding;
 	background-color: #fff;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #333;
 	&__category {
 		position: relative;
 		display: inline-block;
@@ -67,6 +78,13 @@ ul, li {
 	}
 }
 
+.sps-footer {
+	display: block;
+	padding: (@padding * 2) @padding;
+	color: #fff;
+	background-color: #333;
+}
+
 .sps-pattern-detail {
 	&__header-code {
 		color: #aaa;
@@ -83,7 +101,8 @@ ul, li {
 	}
 	&__html, &__less {
 		padding: @padding;
-		background-color: #fff;
+		color: #fff;
+		background-color: #333;
 		border: 1px solid #ccc;
 	}
 }
