@@ -19,7 +19,7 @@ while (stack.length > 0) {
 	let node = nodeStack.shift();
 
 	if (fs.statSync(pop).isDirectory()) {
-		for (let item of fs.readdirSync(pop)) {
+		for (let item of fs.readdirSync(pop).filter(item => item !== '.gitkeep')) {
 			stack.push(path.join(pop, item));
 			let childNode = {
 				name: item,
@@ -40,7 +40,7 @@ while (stack.length > 0) {
 		delete node.children;
 
 		if(match[2] === 'less') {
-			let lessImport = `@import '../../${key}.less';`;
+			let lessImport = `@import '../../../${key}.less';`;
 			lessImports.push(lessImport);
 		}
 	}
@@ -52,6 +52,11 @@ let patternManifest = {
 };
 
 let asJson = JSON.stringify(patternManifest, undefined, '\t');
+
+fs.writeFileSync(
+	path.resolve(__dirname, '..', 'core/src/styles/patterns.manifest.less'),
+	`${lessImports.join('\n')}`
+)
 
 fs.writeFileSync(
 	path.resolve(__dirname, '..', 'core/src/patterns.manifest.ts'),
@@ -71,10 +76,5 @@ export interface IPatternManifest {
 	tree: ITreeNode;
 }
 export const patternManifest: IPatternManifest = ${asJson};`);
-
-fs.writeFileSync(
-	path.resolve(__dirname, '..', 'core/src/patterns.manifest.less'),
-	`${lessImports.join('\n')}`
-)
 
 process.exit();
