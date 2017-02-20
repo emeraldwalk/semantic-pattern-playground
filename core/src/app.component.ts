@@ -30,4 +30,11 @@ export class AppComponent {
 	public patternId(fileName: string): string {
 		return fileName.replace(/\.[^\.]+$/, '');
 	}
+
+	public displayName(machineName: string): string {
+		return machineName
+			.replace(/^\d+_/, '')
+			.replace(/\.html$/, '')
+			.replace(/(^|-)(.)/g, (match, dash, char: string) => `${dash && ' '}${char.toUpperCase()}`);
+	}
 }

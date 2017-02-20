@@ -1,16 +1,16 @@
 export const template =
 `<div>
-	<nav>
-		<ul>
-			<li ng-repeat="category in $ctrl.patterns">{{category.name}}
-				<ul><li ui-sref-active="active"
+	<nav class="sps-navbar">
+		<ul class="sps-navbar__categories">
+			<li class="sps-navbar__category"
+				ng-repeat="category in $ctrl.patterns">{{$ctrl.displayName(category.name)}}
+				<ul class="sps-navbar__category-dropdown"><li ui-sref-active="active"
 						ng-repeat="pattern in category.children | filter:'.html'">
-						<a ui-sref="app.pattern({id: $ctrl.patternId(pattern.name)})">{{pattern.name}}</a>
+						<a ui-sref="app.pattern({id: $ctrl.patternId(pattern.name)})">{{$ctrl.displayName(pattern.name)}}</a>
 				</li></ul>
 			</li>
 		</ul>
 	</nav>
 	<h1>{{$ctrl.currentPatternId}}</h1>
 	<ui-view></ui-view>
-	<!--<pre><ng-bind-html>{{$ctrl.patternHtml}}</ng-bind-html></pre>-->
 </div>`;
