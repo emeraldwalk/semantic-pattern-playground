@@ -27,14 +27,18 @@ export class AppComponent {
 		return this._$stateParams['id'];
 	}
 
-	public patternId(fileName: string): string {
-		return fileName.replace(/\.[^\.]+$/, '');
+	public patternIds(patterns: Array<{name: string}>) {
+		// unique patternIds
+		let names = patterns
+			.map(pattern => pattern.name.replace(/\.[^\.]+$/, ''))
+			.filter((name, i, array) => i === array.indexOf(name));
+
+		return names;
 	}
 
 	public displayName(machineName: string): string {
 		return machineName
-			.replace(/^\d+_/, '')
-			.replace(/\.html$/, '')
+			.replace(/^\d+_/, '') // leading digits + underscore
 			.replace(/(^|-)(.)/g, (match, dash, char: string) => `${dash && ' '}${char.toUpperCase()}`);
 	}
 }

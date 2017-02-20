@@ -17,12 +17,16 @@ export const patternManifest: IPatternManifest = {
 	"map": {
 		"patterns/0_elements/01_reset": {
 			"name": "01_reset",
-			"html": true,
+			"less": true
+		},
+		"patterns/0_elements/02_fonts": {
+			"name": "02_fonts",
 			"less": true
 		},
 		"patterns/0_elements/headers": {
 			"name": "headers",
-			"html": true
+			"html": true,
+			"less": true
 		},
 		"patterns/1_components/person-editor": {
 			"name": "person-editor",
@@ -44,13 +48,16 @@ export const patternManifest: IPatternManifest = {
 				"name": "0_elements",
 				"children": [
 					{
-						"name": "01_reset.html"
-					},
-					{
 						"name": "01_reset.less"
 					},
 					{
+						"name": "02_fonts.less"
+					},
+					{
 						"name": "headers.html"
+					},
+					{
+						"name": "headers.less"
 					}
 				]
 			},

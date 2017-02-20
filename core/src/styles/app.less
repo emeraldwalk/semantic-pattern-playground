@@ -1,7 +1,9 @@
 @padding: 10px;
+@font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 
-body {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+html {
+	font-family: @font-family;
+	background-color: #ccc;
 }
 
 ul, li {
@@ -11,7 +13,9 @@ ul, li {
 }
 
 .sps-navbar {
+	font-family: @font-family;
 	padding: @padding;
+	background-color: #fff;
 	border-bottom: 1px solid #ccc;
 	&__category {
 		position: relative;
@@ -23,6 +27,7 @@ ul, li {
 		}
 	}
 	&__category-dropdown {
+		padding-top: @padding;
 		position: absolute;
 		visibility: hidden;
 		.sps-navbar__category:hover & {
@@ -57,15 +62,28 @@ ul, li {
 .sps-main {
 	display: block;
 	padding: @padding;
+	&__header-primary {
+		font-family: @font-family;
+	}
+}
+
+.sps-pattern-detail {
+	&__header-code {
+		color: #aaa;
+		font-size: 1em;
+		margin-bottom: .3em;
+	}
 }
 
 .sps-pattern {
 	&__render {
 		padding: @padding;
+		background-color: #fff;
 		border: 1px solid #ccc;
 	}
 	&__html, &__less {
 		padding: @padding;
+		background-color: #fff;
 		border: 1px solid #ccc;
 	}
 }
