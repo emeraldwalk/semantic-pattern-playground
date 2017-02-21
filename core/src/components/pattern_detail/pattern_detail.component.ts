@@ -11,6 +11,7 @@ export class PatternDetailComponent {
 
 	public templateSrc: string;
 	public lessSrc: string;
+	public jsonSrc: string;
 
 	public srcTabs: Array<ITab>;
 
@@ -27,7 +28,8 @@ export class PatternDetailComponent {
 			if (patternManifest.map[key].name === this._$stateParams['id']) {
 				config = {
 					html: patternManifest.map[key].html && `${key}.html`,
-					less: patternManifest.map[key].less && `${key}.less`
+					less: patternManifest.map[key].less && `${key}.less`,
+					json: patternManifest.map[key].json && `${key}.json`
 				};
 				return true;
 			}
@@ -49,6 +51,16 @@ export class PatternDetailComponent {
 				this.srcTabs.push({
 					label: 'Styles',
 					content: this.lessSrc
+				});
+			});
+		}
+
+		if (config && config.json) {
+			this._$templateRequest(`${config.json}`).then(value => {
+				this.jsonSrc = this._$sce.trustAsHtml(value);
+				this.srcTabs.push({
+					label: 'Data',
+					content: this.jsonSrc
 				});
 			});
 		}
