@@ -8,7 +8,7 @@
     "build": "core/build_manifest.js"
   },
   "scripts": {
-    "serve": "node core/build_manifest.js && webpack-dev-server"
+    "start": "node core/build_manifest.js && webpack-dev-server"
   },
   "keywords": [],
   "author": "",
