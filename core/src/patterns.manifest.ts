@@ -7,7 +7,7 @@ export interface IPatternManifest {
 		[key: string]: {
 			name: string,
 			html?: boolean,
-			json?: boolean,
+			json?: Object,
 			less?: boolean
 		}
 	},
@@ -31,13 +31,34 @@ export const patternManifest: IPatternManifest = {
 		"patterns/1_components/person-editor": {
 			"name": "person-editor",
 			"html": true,
-			"json": true,
+			"json": {
+				"firstName": "John",
+				"lastName": "Doe"
+			},
 			"less": true
+		},
+		"patterns/1_components/person-list-editor": {
+			"name": "person-list-editor",
+			"html": true,
+			"json": {
+				"people": [
+					{
+						"firstName": "Jeff",
+						"lastName": "Smith"
+					},
+					{
+						"firstName": "James",
+						"lastName": "Jones"
+					}
+				]
+			}
 		},
 		"patterns/1_components/person-selector": {
 			"name": "person-selector",
 			"html": true,
-			"json": true,
+			"json": {
+				"selected": "Jane Doe"
+			},
 			"less": true
 		}
 	},
@@ -72,6 +93,12 @@ export const patternManifest: IPatternManifest = {
 					},
 					{
 						"name": "person-editor.less"
+					},
+					{
+						"name": "person-list-editor.html"
+					},
+					{
+						"name": "person-list-editor.json"
 					},
 					{
 						"name": "person-selector.html"

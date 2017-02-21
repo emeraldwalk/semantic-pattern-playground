@@ -14,26 +14,38 @@ for (let key of componentKeys) {
 	let selector = patternIdToSelector(config.name);
 	let componentName = dashToCamelCase(selector);
 
+	let bindings = {};
+	for (let key in config.json || {}) {
+		bindings[key] = '<';
+	}
+
 	patternComponentMap[componentName] = {
 		templateUrl: ($element: ng.IRootElementService) => {
-			$element.addClass(`c-${selector}`);
+			$element.addClass(`sps-pattern sps-${selector}`);
 			return `${key}.html`;
 		},
+		bindings,
 		controller: class {
-			public static $inject = ['$http', '$scope'];
+			public static $inject = ['$scope', '$http'];
 			constructor(
-				private _$http: ng.IHttpService,
-				private _$scope: ng.IScope) {
+				private _$scope: ng.IScope,
+				private _$http: ng.IHttpService) {
 			}
 
 			public $onInit(): void {
-				if (config.json) {
-					this._$http.get(`${key}.json`)
-						.then(content => {
-							for (let key in content.data) {
-								this._$scope[key] = content.data[key];
-							}
-						});
+				if(config.json) {
+					// refreshing in case the manifest hasn't been rebuilt
+					this._$http.get(`${key}.json`).then(content => {
+						for (let key in content.data) {
+							this._$scope[key] = this[key] || content.data[key];
+						}
+					});
+				}
+			}
+
+			public $onChanges(): void {
+				for(let key in bindings) {
+					this._$scope[key] = this[key];
 				}
 			}
 		}

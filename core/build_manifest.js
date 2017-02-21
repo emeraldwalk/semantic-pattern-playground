@@ -37,6 +37,9 @@ while (stack.length > 0) {
 			name: match[1]
 		};
 		pathMap[key][match[2]] = true;
+		if(match[2] === 'json') {
+			pathMap[key][match[2]] = JSON.parse(String(fs.readFileSync(pop)));
+		}
 		delete node.children;
 
 		if(match[2] === 'less') {
@@ -69,7 +72,7 @@ export interface IPatternManifest {
 		[key: string]: {
 			name: string,
 			html?: boolean,
-			json?: boolean,
+			json?: Object,
 			less?: boolean
 		}
 	},
