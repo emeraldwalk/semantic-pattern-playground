@@ -80,5 +80,18 @@ export interface IPatternManifest {
 }
 export const patternManifest: IPatternManifest = ${asJson};`);
 
+// let distCopy = [
+// 	{ from: 'node_modules/angular/angular.js', to: 'docs/dist/angular.js' },
+// 	{ from: 'node_modules/angular-sanitize/angular-sanitize.js', to: 'docs/dist/angular-sanitize.js' },
+// 	{ from: 'node_modules/angular-ui-router/release/angular-ui-router.js', to: 'docs/dist/angular-ui-router.js' }
+// ];
+
+// for(let map of distCopy) {
+// 	let from = fs.readFileSync(path.resolve(__dirname, '..', map.from));
+// 	fs.writeFileSync(
+// 		path.resolve(__dirname, '..', map.to),
+// 		from);
+// }
+
 console.log('done.');
 process.exit();

@@ -24,8 +24,8 @@ let config: Configuration = {
 		]
 	},
 	output: {
-		path: `./core/dist`,
-		filename: 'bundle.js'
+		path: `./docs/dist`,
+		filename: 'bundle.js',
 	},
 	externals: {
 		'angular': 'angular',
