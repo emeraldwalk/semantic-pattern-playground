@@ -8,6 +8,10 @@ export const states = [
 		template: '<sps-app></sps-app>'
 	},
 	{
+		name: 'app.default',
+		url: '',
+	},
+	{
 		name: 'app.pattern',
 		url: '/pattern/:id',
 		template: '<sps-pattern-detail></sps-pattern-detail>'

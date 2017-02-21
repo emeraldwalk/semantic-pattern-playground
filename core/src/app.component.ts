@@ -25,7 +25,7 @@ export class AppComponent {
 		return this._$stateParams['id'];
 	}
 
-	public patternIds(patterns: Array<{name: string}>) {
+	public patternIds(patterns: Array<{ name: string }>) {
 		// unique patternIds
 		let names = patterns
 			.map(pattern => pattern.name.replace(/\.[^\.]+$/, ''))
@@ -35,8 +35,10 @@ export class AppComponent {
 	}
 
 	public displayName(machineName: string): string {
-		return machineName
-			.replace(/^\d+_/, '') // leading digits + underscore
-			.replace(/(^|-)(.)/g, (match, dash, char: string) => `${dash && ' '}${char.toUpperCase()}`);
+		if (machineName) {
+			return machineName
+				.replace(/^\d+_/, '') // leading digits + underscore
+				.replace(/(^|-)(.)/g, (match, dash, char: string) => `${dash && ' '}${char.toUpperCase()}`);
+		}
 	}
 }

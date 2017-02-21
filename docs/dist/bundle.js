@@ -543,9 +543,11 @@
 	        return names;
 	    };
 	    AppComponent.prototype.displayName = function (machineName) {
-	        return machineName
-	            .replace(/^\d+_/, '') // leading digits + underscore
-	            .replace(/(^|-)(.)/g, function (match, dash, char) { return "" + (dash && ' ') + char.toUpperCase(); });
+	        if (machineName) {
+	            return machineName
+	                .replace(/^\d+_/, '') // leading digits + underscore
+	                .replace(/(^|-)(.)/g, function (match, dash, char) { return "" + (dash && ' ') + char.toUpperCase(); });
+	        }
 	    };
 	    return AppComponent;
 	}());
@@ -882,6 +884,10 @@
 	        url: '',
 	        abstract: true,
 	        template: '<sps-app></sps-app>'
+	    },
+	    {
+	        name: 'app.default',
+	        url: '',
 	    },
 	    {
 	        name: 'app.pattern',
