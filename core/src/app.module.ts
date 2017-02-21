@@ -3,6 +3,7 @@ import './styles/_bundle';
 import * as angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 import { AppComponent } from './app.component';
+import { templateProvider as appTemplate } from './app.component.tpl';
 import { patternComponentMap } from './components/pattern/pattern.component';
 import { PatternDetailComponent } from './components/pattern_detail/pattern_detail.component';
 import { templateProvider as patternDetailTemplate } from './components/pattern_detail/pattern_detail.component.tpl';
@@ -16,7 +17,7 @@ export const appModule = angular.module(
  * Primary app component.
  */
 appModule.component('app', {
-	template: AppComponent.template,
+	template: appTemplate,
 	controller: AppComponent
 });
 

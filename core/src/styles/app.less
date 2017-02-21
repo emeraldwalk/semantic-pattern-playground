@@ -1,4 +1,6 @@
 @padding: 10px;
+@footer-font-size: 16px;
+@footer-height: @footer-font-size + (@padding * 4);
 @font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 
 html {
@@ -6,11 +8,21 @@ html {
 	color: #333;
 	background-color: #ccc;
 }
+html, body {
+	height: 100%;
+}
 
 ul, li {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+
+.sps-app {
+	display: block;
+	position: relative;
+	min-height: 100%;
+	padding-bottom: @footer-height;
 }
 
 .sps-masthead {
@@ -79,7 +91,14 @@ ul, li {
 }
 
 .sps-footer {
+	font-size: @footer-font-size;
 	display: block;
+	position: absolute;
+	height: @footer-height - (@padding * 4);
+	bottom: 0;
+	left: 0;
+	width: calc(100% ~"-" 20px);
+	margin-top: 1em;
 	padding: (@padding * 2) @padding;
 	color: #fff;
 	background-color: #333;

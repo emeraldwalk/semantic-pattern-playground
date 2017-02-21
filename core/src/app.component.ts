@@ -2,14 +2,12 @@ import * as angular from 'angular';
 import * as uiRouter from 'angular-ui-router';
 
 import { appModule } from './app.module';
-import { template } from './app.component.tpl';
 import { ITreeNode, patternManifest } from '../src/patterns.manifest';
 
 /**
  * Primary app component
  */
 export class AppComponent {
-	public static template = template;
 	public static $inject = ['$stateParams', '$element'];
 
 	constructor(

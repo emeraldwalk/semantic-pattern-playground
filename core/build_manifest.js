@@ -77,4 +77,5 @@ export interface IPatternManifest {
 }
 export const patternManifest: IPatternManifest = ${asJson};`);
 
+console.log('done.');
 process.exit();
