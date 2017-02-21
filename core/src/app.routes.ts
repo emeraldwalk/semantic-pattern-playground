@@ -5,11 +5,11 @@ export const states = [
 		name: 'app',
 		url: '',
 		abstract: true,
-		template: '<app></app>'
+		template: '<sps-app></sps-app>'
 	},
 	{
 		name: 'app.pattern',
 		url: '/pattern/:id',
-		template: '<pattern-detail></pattern-detail>'
+		template: '<sps-pattern-detail></sps-pattern-detail>'
 	}
 ];

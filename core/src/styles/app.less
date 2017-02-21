@@ -26,6 +26,7 @@ ul, li {
 }
 
 .sps-masthead {
+	display: block;
 	font-family: @font-family;
 	padding: @padding;
 	color: #fff;
@@ -91,8 +92,8 @@ ul, li {
 }
 
 .sps-footer {
-	font-size: @footer-font-size;
 	display: block;
+	font-size: @footer-font-size;
 	position: absolute;
 	height: @footer-height - (@padding * 4);
 	bottom: 0;
@@ -105,20 +106,41 @@ ul, li {
 }
 
 .sps-pattern-detail {
+	display: block;
 	&__header-code {
 		color: #aaa;
 		font-size: 1em;
 		margin-bottom: .3em;
 	}
-}
-
-.sps-pattern {
-	&__render {
+	&__pattern {
 		padding: @padding;
 		background-color: #fff;
 		border: 1px solid #ccc;
 	}
-	&__html, &__less {
+	&__source {
+		margin-top: @padding;
+	}
+}
+
+.sps-tabset {
+	display: block;
+	&__tab {
+		display: inline-block;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		color: #aaa;
+		font-size: 1em;
+		padding: @padding;
+		cursor: pointer;
+		&--active {
+			color: #333;
+			background: #fff;
+		}
+	}
+	&__tab-content {
+		height: 250px;
+		max-height: 250px;
+		overflow-y: auto;
 		padding: @padding;
 		color: #fff;
 		background-color: #333;

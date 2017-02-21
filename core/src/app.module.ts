@@ -7,6 +7,8 @@ import { templateProvider as appTemplate } from './app.component.tpl';
 import { patternComponentMap } from './components/pattern/pattern.component';
 import { PatternDetailComponent } from './components/pattern_detail/pattern_detail.component';
 import { templateProvider as patternDetailTemplate } from './components/pattern_detail/pattern_detail.component.tpl';
+import { TabsetComponent } from './components/tabset/tabset.component';
+import { templateProvider as tabsetTemplate } from './components/tabset/tabset.component.tpl';
 import { states } from './app.routes';
 
 export const appModule = angular.module(
@@ -16,14 +18,22 @@ export const appModule = angular.module(
 /**
  * Primary app component.
  */
-appModule.component('app', {
+appModule.component('spsApp', {
 	template: appTemplate,
 	controller: AppComponent
 });
 
-appModule.component('patternDetail', {
+appModule.component('spsPatternDetail', {
 	template: patternDetailTemplate,
 	controller: PatternDetailComponent
+});
+
+appModule.component('spsTabset', {
+	template: tabsetTemplate,
+	bindings: {
+		tabs: '<'
+	},
+	controller: TabsetComponent
 });
 
 /**

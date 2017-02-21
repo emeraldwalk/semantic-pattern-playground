@@ -1,4 +1,5 @@
 import { patternManifest } from '../../patterns.manifest';
+import { ITab } from '../tabset/tabset.component';
 
 export class PatternDetailComponent {
 	public static $inject = ['$sce', '$stateParams', '$templateRequest'];
@@ -11,7 +12,11 @@ export class PatternDetailComponent {
 	public templateSrc: string;
 	public lessSrc: string;
 
+	public srcTabs: Array<ITab>;
+
 	public $onInit(): void {
+		this.srcTabs = [];
+
 		let keys = Object.keys(patternManifest.map);
 
 		/**
@@ -31,12 +36,20 @@ export class PatternDetailComponent {
 		if (config && config.html) {
 			this._$templateRequest(`${config.html}`).then(value => {
 				this.templateSrc = this._$sce.trustAsHtml(value);
+				this.srcTabs.push({
+					label: 'Source',
+					content: this.templateSrc
+				});
 			});
 		}
 
 		if (config && config.less) {
 			this._$templateRequest(`${config.less}`).then(value => {
 				this.lessSrc = this._$sce.trustAsHtml(value);
+				this.srcTabs.push({
+					label: 'Styles',
+					content: this.lessSrc
+				});
 			});
 		}
 	}
